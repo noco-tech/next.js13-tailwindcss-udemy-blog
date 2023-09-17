@@ -11,6 +11,12 @@
       "title": "Json Server",
       "content": "Json Server - Udemy aaaaaaaaaaaaaaaaafqqqqqqqqqqqqq",
       "createdAt": "2023-11-20"
+     },
+     {
+       "id": "app-router-update",
+       "title": "Next.js App Router Update",
+       "content": "The App Router represents a new foundation for the future of Next.js, but we recognize there are opportunities to make the experience better. We'd like ",
+       "createdAt": "2023-11-20"
      }
     ]
 }
