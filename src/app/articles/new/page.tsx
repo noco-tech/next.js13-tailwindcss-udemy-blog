@@ -3,19 +3,22 @@ import React, { useState } from "react";
 import { createArticle } from "@/blogAPI";
 import { useRouter } from "next/navigation";
 
-
 const CreateBlogPage = () => {
   const router = useRouter();
 
   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const article = await createArticle( id, title, content);
+    setLoading(true);
+
+    const article = await createArticle(id, title, content);
     // console.log(article);
+    setLoading(false);
     router.push("/");
     router.refresh();
   };
@@ -69,7 +72,9 @@ const CreateBlogPage = () => {
           />
         </div>
 
-        <button className="py-2 px-4 border rounded-md bg-orange-300">
+        <button className={`py-2 px-4 border rounded-md ${loading ? 'bg-orange-300 cursor-not-allowed' : 'bg-orange-400 hover:bg-orange-500'}  `}
+        disabled={loading}
+        >
           投稿
         </button>
       </form>

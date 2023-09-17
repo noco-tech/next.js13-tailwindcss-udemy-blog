@@ -29,6 +29,12 @@
       "title": "useRouter()を使おうとしたらエラー",
       "content": "vscodeで自動インポートするとimport { useRouter } from \"next/router\";となり\n\nnext/routerからインポートされます。それだと**Error: NextRouter was not mounted. https://nextjs.org/docs/messages/next-router-not-mountedという**エラーが出ます。\n\nエラーから公式ページに飛んでみると、next/navigationからインポートしてと書いてあります。\n⭕️import { useRouter } from \"next/navigation\";",
       "createdAt": "2023-09-17T13:18:44.081Z"
+    },
+    {
+      "id": "a",
+      "title": "a",
+      "content": "aaa",
+      "createdAt": "2023-09-17T21:08:24.726Z"
     }
   ]
 }
