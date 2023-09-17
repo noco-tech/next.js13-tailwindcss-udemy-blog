@@ -15,7 +15,7 @@ export const getAllArticles = async (): Promise<Article[]> => {
   return articles
 }
 
-//詳細ページ用API
+//詳細ページ取得API
 export const getDetailArticle = async (id: string): Promise<Article> => {
   const res = await fetch(`http://localhost:3001/posts/${id}`, { next: { revalidate: 60} }); //ISR
 
@@ -34,3 +34,25 @@ export const getDetailArticle = async (id: string): Promise<Article> => {
   return article;
 };
 
+//記事作成API
+export const createArticle = async (id: string, title: string, content: string): Promise<Article> => {
+  const currentDatetime = new Date().toISOString();
+
+  const res = await fetch(`http://localhost:3001/posts`, {
+    method: "POST",
+    body: JSON.stringify({ id, title, content, createdAt: currentDatetime }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("エラーが発生したため記事を取得できませんでした。");
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const newArticle = await res.json();
+  return newArticle;
+
+}
