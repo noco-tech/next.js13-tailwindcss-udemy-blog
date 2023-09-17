@@ -47,12 +47,29 @@ export const createArticle = async (id: string, title: string, content: string):
   });
 
   if (!res.ok) {
-    throw new Error("エラーが発生したため記事を取得できませんでした。");
+    throw new Error("エラーが発生しました");
   }
 
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   const newArticle = await res.json();
   return newArticle;
+
+}
+
+//記事削除API
+export const deleteArticle = async (id: string): Promise<Article> => {
+  const res = await fetch(`http://localhost:3001/posts/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("エラーが発生しました");
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const deletedArticle = await res.json();
+  return deletedArticle;
 
 }

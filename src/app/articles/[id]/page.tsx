@@ -1,9 +1,12 @@
+import React from 'react'
 import { getDetailArticle } from '@/blogAPI';
 import Image from 'next/image'
-import React from 'react'
+import { DeleteButton } from '@/app/components/DeleteButton';
 
 
 const Article = async ({params}: {params: {id: string }}) => {
+
+
   // 詳細ページのAPI呼び出し
   const detailArticle = await getDetailArticle(params.id);
 
@@ -20,6 +23,9 @@ const Article = async ({params}: {params: {id: string }}) => {
       <div className="text-lg leading-relaxed text-justify">
         <p>{detailArticle.content}</p>
         <p>Published {detailArticle.createdAt}</p>
+      </div>
+      <div className='text-right mt-3'>
+        <DeleteButton id={detailArticle.id} />
       </div>
     </div>
   );
