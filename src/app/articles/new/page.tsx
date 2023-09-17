@@ -29,7 +29,10 @@ const CreateBlogPage = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="text" className="text-gray-700 text-sm font-bold mb-2">
+          <label
+            htmlFor="text"
+            className="text-gray-700 text-sm font-bold mb-2"
+          >
             本文
           </label>
           <textarea
@@ -38,7 +41,9 @@ const CreateBlogPage = () => {
           />
         </div>
 
-        <button className="py-2 px-4 border rounded-md bg-orange-300">投稿</button>
+        <button className="py-2 px-4 border rounded-md bg-orange-300">
+          投稿
+        </button>
       </form>
     </div>
   );

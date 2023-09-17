@@ -8,7 +8,7 @@ export default async function Home() {
   // console.log(articles);
 
   return (
-    <div className="md:flex">
+    <div className="md:flex flex-grow">
       <section className='w-full md-2/3 flex-col items-center px-3'>
         <ArticleList articles={articles} />
       </section>
