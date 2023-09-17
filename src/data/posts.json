@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": "next.js13-udemy",
+      "title": "Next.js 13 - Udemy",
+      "content": "Next.js 13 - Udemy",
+      "createdAt": "2021-10-20"
+     },
+    {
+      "id": "json-server",
+      "title": "Json Server",
+      "content": "Json Server - Udemy aaaaaaaaaaaaaaaaafqqqqqqqqqqqqq",
+      "createdAt": "2023-11-20"
+     }
+    ]
+}
