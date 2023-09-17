@@ -9,6 +9,8 @@ export const getAllArticles = async (): Promise<Article[]> => {
     throw new Error("エラーが発生したため記事を取得できませんでした。")
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 500)); //1秒かけてjsonを取得する 意図的にローディングを発生させる
+
   const articles = await res.json()
   return articles
 }
