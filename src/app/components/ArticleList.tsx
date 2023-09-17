@@ -15,7 +15,7 @@ export const ArticleList = ({articles}: ArticleListProps) => {
         <article key={article.id} className="shadow my-4 flex flex-col">
           <Link href={`articles/${article.id}`} className="hover:opacity-90">
             <Image
-              src="https://source.unsplash.com/collection/1345863/1000x500?sig=1"
+              src="https://source.unsplash.com/collection/1345862/1000x500?sig=1"
               alt=""
               width={1280}
               height={300}
