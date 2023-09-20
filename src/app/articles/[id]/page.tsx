@@ -1,10 +1,10 @@
-import React from 'react'
-import { getDetailArticle } from '@/blogAPI';
-import Image from 'next/image'
-import { DeleteButton } from '@/app/components/DeleteButton';
+import React from "react";
+import { getDetailArticle } from "@/blogAPI";
+import Image from "next/image";
+import { DeleteButton } from "@/app/components/DeleteButton";
+import { UpdateButton } from "@/app/components/UpdateButton";
 
-
-const Article = async ({params}: {params: {id: string }}) => {
+const Article = async ({ params }: { params: { id: string } }) => {
   // 詳細ページのAPI呼び出し(json-serverから)
   // const detailArticle = await getDetailArticle(params.id);
 
@@ -14,12 +14,10 @@ const Article = async ({params}: {params: {id: string }}) => {
   const res = await fetch(`${API_URL}/api/${params.id}`, {
     next: {
       revalidate: 10,
-    }
+    },
   }); //ISR
 
   const detailArticle = await res.json();
-
-
 
   return (
     <div className="max-w-3xl mx-auto p-5">
@@ -35,11 +33,17 @@ const Article = async ({params}: {params: {id: string }}) => {
         <p>{detailArticle.content}</p>
         <p>Published {new Date(detailArticle.createdAt).toLocaleString()}</p>
       </div>
-      <div className="text-right mt-3">
-        <DeleteButton id={detailArticle.id} />
+
+      <div className="flex justify-end mt-3 gap-4">
+        <div>
+          <UpdateButton id={detailArticle.id} />
+        </div>
+        <div>
+          <DeleteButton id={detailArticle.id} />
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default Article
+export default Article;

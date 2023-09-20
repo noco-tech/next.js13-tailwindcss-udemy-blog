@@ -1,53 +1,60 @@
 "use client";
-import React, { useState } from "react";
-import { createArticle } from "@/blogAPI";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/utils/supabaseClient";
 
-const CreateBlogPage = () => {
+const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
-  const [id, setId] = useState<string>("");
+  const [id, setId] = useState<string>(params.id);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // 詳細ページのAPI呼び出し(supabaseから)
+  useEffect(() => {
+    const fetchDetailArticle = async () => {
+      if (!id) return;
+      const { data, error } = await supabase
+        .from("posts")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error) {
+        console.log(error);
+      } else {
+        setId(data.id);
+        setTitle(data.title);
+        setContent(data.content);
+      }
+    }
+    fetchDetailArticle();
+  }, [id]);
+
+
+
+  // 投稿のupdate
+  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setLoading(true);
 
-    // 新規投稿のAPI (json-server)
-    // const article = await createArticle(id, title, content);
-    // console.log(article);
-
-
-    // 新規投稿のAPI呼び出し(supabaseへの登録)
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-    await fetch(`${API_URL}/api/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          title,
-          content,
-        }),
-      });
-
+    const { error } = await supabase
+      .from("posts")
+      .update({ title, content })
+      .eq("id", id);
 
     setLoading(false);
     router.push("/");
     router.refresh();
   };
 
-
   return (
     <div className="min-h-screen py-8 px-4 md:px-12">
-      <h2 className="text-2xl font-bold mb-4">ブログ新規作成</h2>
+      <h2 className="text-2xl font-bold mb-4">ブログ編集</h2>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleUpdate}
         className="bg-slate-200 p-6 rounded shadow-lg"
       >
         <div className="mb-4">
@@ -59,6 +66,7 @@ const CreateBlogPage = () => {
             id="url"
             onChange={(e) => setId(e.target.value)}
             value={id}
+            disabled
             className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />
         </div>
@@ -100,11 +108,11 @@ const CreateBlogPage = () => {
           }  `}
           disabled={loading}
         >
-          投稿
+          更新
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateBlogPage;
+export default UpdateBlogPage;
