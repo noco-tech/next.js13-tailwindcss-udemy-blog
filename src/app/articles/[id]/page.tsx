@@ -5,10 +5,21 @@ import { DeleteButton } from '@/app/components/DeleteButton';
 
 
 const Article = async ({params}: {params: {id: string }}) => {
+  // 詳細ページのAPI呼び出し(json-serverから)
+  // const detailArticle = await getDetailArticle(params.id);
+
+  // 詳細ページのAPI呼び出し(supabaseから)
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const res = await fetch(`${API_URL}/api/${params.id}`, {
+    next: {
+      revalidate: 10,
+    }
+  }); //ISR
+
+  const detailArticle = await res.json();
 
 
-  // 詳細ページのAPI呼び出し
-  const detailArticle = await getDetailArticle(params.id);
 
   return (
     <div className="max-w-3xl mx-auto p-5">
@@ -24,7 +35,7 @@ const Article = async ({params}: {params: {id: string }}) => {
         <p>{detailArticle.content}</p>
         <p>Published {detailArticle.createdAt}</p>
       </div>
-      <div className='text-right mt-3'>
+      <div className="text-right mt-3">
         <DeleteButton id={detailArticle.id} />
       </div>
     </div>
