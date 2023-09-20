@@ -4,11 +4,17 @@ import { getAllArticles } from '@/blogAPI';
 import { supabase } from '@/utils/supabaseClient';
 
 export default async function Home() {
-  // 全記事取得するAPIを呼ぶ
-  const articles = await getAllArticles();
+  // 全記事をjson-serverから取得するAPIを呼ぶ
+  // const articles = await getAllArticles();
   // console.log(articles);
 
   // console.log(supabase)
+  /* スパベースから全記事データを取得する */
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${API_URL}/api`, { cache: "no-store" }); //SSR
+
+  const articles = await res.json();
+  // console.log(articles);
 
   return (
     <div className="md:flex flex-grow">
