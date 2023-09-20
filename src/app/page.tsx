@@ -11,7 +11,7 @@ export default async function Home() {
   // console.log(supabase)
   /* スパベースから全記事データを取得する */
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${API_URL}/api`, { cache: "no-store" }); //SSR
+  const res = await fetch(`${API_URL}/api/blog`, { cache: "no-store" }); //SSR
 
   const articles = await res.json();
   // console.log(articles);
