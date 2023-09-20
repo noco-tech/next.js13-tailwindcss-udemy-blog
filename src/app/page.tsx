@@ -1,11 +1,14 @@
 import Image from 'next/image'
 import { ArticleList } from './components/ArticleList'
 import { getAllArticles } from '@/blogAPI';
+import { supabase } from '@/utils/supabaseClient';
 
 export default async function Home() {
   // 全記事取得するAPIを呼ぶ
   const articles = await getAllArticles();
   // console.log(articles);
+
+  // console.log(supabase)
 
   return (
     <div className="md:flex flex-grow">
