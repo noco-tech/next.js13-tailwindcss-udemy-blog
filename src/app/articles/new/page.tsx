@@ -16,8 +16,26 @@ const CreateBlogPage = () => {
 
     setLoading(true);
 
-    const article = await createArticle(id, title, content);
+    // 新規投稿のAPI (json-server)
+    // const article = await createArticle(id, title, content);
     // console.log(article);
+
+
+    // 新規投稿のAPI呼び出し(supabaseへの登録)
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    await fetch(`${API_URL}/api/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        title,
+        content,
+      }),
+    });
+
     setLoading(false);
     router.push("/");
     router.refresh();
@@ -72,8 +90,13 @@ const CreateBlogPage = () => {
           />
         </div>
 
-        <button className={`py-2 px-4 border rounded-md ${loading ? 'bg-orange-300 cursor-not-allowed' : 'bg-orange-400 hover:bg-orange-500'}  `}
-        disabled={loading}
+        <button
+          className={`py-2 px-4 border rounded-md ${
+            loading
+              ? "bg-orange-300 cursor-not-allowed"
+              : "bg-orange-400 hover:bg-orange-500"
+          }  `}
+          disabled={loading}
         >
           投稿
         </button>

@@ -33,7 +33,7 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
           {article.title}
         </Link>
         <p className="text-sm pb-3 text-slate-900">
-          Published {article.createdAt}
+          Published {new Date(article.createdAt).toLocaleString()}
         </p>
         <Link href={`articles/${article.id}`} className="text-slate-900 pb-6">
           {article.content.length > 70

@@ -33,7 +33,7 @@ const Article = async ({params}: {params: {id: string }}) => {
       <h1 className="text-4xl text-center my-10">{detailArticle.title}</h1>
       <div className="text-lg leading-relaxed text-justify">
         <p>{detailArticle.content}</p>
-        <p>Published {detailArticle.createdAt}</p>
+        <p>Published {new Date(detailArticle.createdAt).toLocaleString()}</p>
       </div>
       <div className="text-right mt-3">
         <DeleteButton id={detailArticle.id} />
