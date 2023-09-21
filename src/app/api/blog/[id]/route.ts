@@ -9,6 +9,7 @@ export async function GET(req: Request, res: NextApiResponse) {
   // 詳細ページの表示に必要なidを取得 req.urlに変更
   const id = req.url.split("/blog/")[1];
   // console.log(req.url.split("/blog/")[1])
+
   const { data: posts, error } = await supabase
     .from("posts")
     .select("*")
@@ -16,16 +17,15 @@ export async function GET(req: Request, res: NextApiResponse) {
     .single();
 
   // console.log(posts)
+
+
+
   if (error) {
     return NextResponse.json(error);
   }
 
   if (!posts) {
     notFound();
-  }
-
-  if (error) {
-    return NextResponse.json(error);
   }
 
   return NextResponse.json(posts, { status: 200 });

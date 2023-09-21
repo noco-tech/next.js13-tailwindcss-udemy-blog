@@ -33,17 +33,20 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   }, [id]);
 
 
-
   // 投稿のupdate
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setLoading(true);
 
-    const { error } = await supabase
+    const { error: updateError } = await supabase
       .from("posts")
       .update({ title, content })
       .eq("id", id);
+
+    if (updateError) {
+      console.log(updateError);
+    }
 
     setLoading(false);
     router.push("/");
