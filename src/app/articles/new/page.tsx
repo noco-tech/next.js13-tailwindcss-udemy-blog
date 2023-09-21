@@ -24,7 +24,7 @@ const CreateBlogPage = () => {
     // 新規投稿のAPI呼び出し(supabaseへの登録)
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-    await fetch(`${API_URL}/api/create`, {
+    await fetch(`${API_URL}/api/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
