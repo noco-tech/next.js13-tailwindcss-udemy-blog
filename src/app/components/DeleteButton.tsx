@@ -17,7 +17,7 @@ export const DeleteButton = ({ id }: deleteProps) => {
     // supabaseからの削除
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-    await fetch(`${API_URL}/api/${id}`, {
+    await fetch(`${API_URL}/api/blog/${id}`, {
       method: "DELETE",
     });
 

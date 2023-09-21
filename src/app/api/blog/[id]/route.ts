@@ -33,3 +33,20 @@ export async function GET(req: Request, res: NextApiResponse) {
     return NextResponse.json({ message: "Success", posts }, { status: 200 });
   */
 }
+
+// appディレクトリに書く場合 削除用API
+export async function DELETE(req: Request, res: NextApiResponse) {
+  // 詳細ページの表示に必要なidを取得 req.urlに変更
+  const id = req.url.split("/blog/")[1];
+
+  const { error: deleteError } = await supabase
+    .from("posts")
+    .delete()
+    .eq("id", id);
+
+  if (deleteError) {
+    return NextResponse.json(deleteError);
+  }
+
+  return NextResponse.json( { status: 200 });
+}
