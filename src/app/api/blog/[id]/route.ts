@@ -18,8 +18,6 @@ export async function GET(req: Request, res: NextApiResponse) {
 
   // console.log(posts)
 
-
-
   if (error) {
     return NextResponse.json(error);
   }
@@ -33,6 +31,7 @@ export async function GET(req: Request, res: NextApiResponse) {
     return NextResponse.json({ message: "Success", posts }, { status: 200 });
   */
 }
+
 
 // appディレクトリに書く場合 削除用API
 export async function DELETE(req: Request, res: NextApiResponse) {
@@ -48,5 +47,5 @@ export async function DELETE(req: Request, res: NextApiResponse) {
     return NextResponse.json(deleteError);
   }
 
-  return NextResponse.json( { status: 200 });
+  return NextResponse.json({ status: 200 });
 }

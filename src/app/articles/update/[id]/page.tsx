@@ -12,25 +12,56 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // 詳細ページのAPI呼び出し(supabaseから)
+  // useEffect(() => {
+  //   const fetchDetailArticle = async () => {
+  //     if (!id) return;
+  //     const { data, error } = await supabase
+  //       .from("posts")
+  //       .select("*")
+  //       .eq("id", id)
+  //       .single();
+
+  //     if (error) {
+  //       console.log(error);
+  //     } else {
+  //       setId(data.id);
+  //       setTitle(data.title);
+  //       setContent(data.content);
+  //     }
+  //   }
+  //   fetchDetailArticle();
+  // }, [id]);
+
+  // 詳細ページのAPI呼び出し(supabaseから)
+  const fetchDetailData = async () => {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    const res = await fetch(`${API_URL}/api/blog/${params.id}`, {
+      next: {
+        revalidate: 10,
+      },
+    }); //ISR
+
+    const detailArticle = await res.json();
+
+    return detailArticle;
+
+  }
+
   useEffect(() => {
     const fetchDetailArticle = async () => {
       if (!id) return;
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("id", id)
-        .single();
 
-      if (error) {
-        console.log(error);
-      } else {
-        setId(data.id);
-        setTitle(data.title);
-        setContent(data.content);
-      }
+      const detailArticle = await fetchDetailData();
+
+      setId(detailArticle.id);
+      setTitle(detailArticle.title);
+      setContent(detailArticle.content);
     }
     fetchDetailArticle();
   }, [id]);
+
+
 
 
   // 投稿のupdate
@@ -39,6 +70,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
 
     setLoading(true);
 
+    // app/api/blog/[id]/route.tsから PUT呼び出したが、エラーのため、ここでupdateを呼び出す
     const { error: updateError } = await supabase
       .from("posts")
       .update({ title, content })
