@@ -5,7 +5,10 @@ import { NextResponse } from "next/server";
 
 // appディレクトリに書く場合 全記事取得
 export async function GET(req: Request, res: NextApiResponse) {
-  const { data: posts, error } = await supabase.from("posts").select("*");
+  const { data: posts, error } = await supabase
+    .from("posts")
+    .select("*")
+    .order("createdAt", { ascending: false });
 
   // console.log(posts)
   if (error) {
@@ -21,7 +24,7 @@ export async function GET(req: Request, res: NextApiResponse) {
 // appディレクトリに書く場合 投稿API
 export async function POST(req: Request, res: NextApiResponse) {
   // 投稿に必要な属性を取得
-  const { id, title, content } = await req.json();
+  const { id, title, content, categories } = await req.json();
 
   // 記事投稿用のAPI
   const { data: posts, error } = await supabase.from("posts").insert([
@@ -29,6 +32,7 @@ export async function POST(req: Request, res: NextApiResponse) {
       id,
       title,
       content,
+      categories,
       createdAt: new Date().toISOString(),
     },
   ]);

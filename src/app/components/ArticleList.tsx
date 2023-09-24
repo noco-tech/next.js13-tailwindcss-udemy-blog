@@ -9,11 +9,10 @@ type ArticleListProps = {
 }
 
 export const ArticleList = ({articles}: ArticleListProps) => {
-
   return (
     <div>
         {articles.map((article) => (
-        <ArticleCard article={article} key={article.id} />
+          <ArticleCard article={article} key={article.id} />
         ))}
     </div>
   );

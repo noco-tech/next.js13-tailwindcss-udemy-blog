@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { createArticle } from "@/blogAPI";
 import { useRouter } from "next/navigation";
+
+import { createArticle } from "@/blogAPI";
+import { categoriesSelectData } from "@/categoriesSelectData";
+
+
 
 const CreateBlogPage = () => {
   const router = useRouter();
@@ -9,6 +13,7 @@ const CreateBlogPage = () => {
   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [categories, setCategories] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,27 +25,27 @@ const CreateBlogPage = () => {
     // const article = await createArticle(id, title, content);
     // console.log(article);
 
-
     // 新規投稿のAPI呼び出し(supabaseへの登録)
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     await fetch(`${API_URL}/api/blog`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          title,
-          content,
-        }),
-      });
-
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        title,
+        content,
+        categories,
+      }),
+    });
 
     setLoading(false);
     router.push("/");
     router.refresh();
   };
+
 
 
   return (
@@ -90,6 +95,24 @@ const CreateBlogPage = () => {
             value={content}
             className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />
+        </div>
+
+        <label
+          htmlFor="category"
+          className="text-gray-700 text-sm font-bold mb-2"
+        >
+          カテゴリー
+        </label>
+        <div className="mb-3 focus:outline-none">
+          <select
+            id="category"
+            className="text-slate-300 shadow p-2 focus:outline-none rounded-md w-full"
+            onChange={(e) => setCategories(e.target.value)}
+          >
+            {categoriesSelectData.map((data, index) => (
+              <option key={index}>{data}</option>
+            ))}
+          </select>
         </div>
 
         <button

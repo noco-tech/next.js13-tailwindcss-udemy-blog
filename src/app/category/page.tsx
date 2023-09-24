@@ -1,24 +1,48 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { supabase } from "@/utils/supabaseClient";
+import { Article } from "@/types";
 
-import { ArticleList } from "./components/ArticleList";
+import { ArticleList } from "@/app/components/ArticleList";
+// import { useRouter } from "next/router";
 
-export default async function Home() {
-  // 全記事をjson-serverから取得するAPIを呼ぶ
-  // const articles = await getAllArticles();
-  // console.log(articles);
+const CategoryBlogPage = () => {
+  const [posts, setPosts] = useState<Article[]>([]);
+  // const [name, setName] = useState<string | null>(null);
 
-  // console.log(supabase)
-  /* スパベースから全記事データを取得する */
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${API_URL}/api/blog`, { cache: "no-store" }); //SSR
+  const searchParams = useSearchParams();
+  const categoryName = searchParams.get("name");
 
-  const articles = await res.json();
-  // console.log(articles);
+  useEffect(() => {
+    if (!categoryName) return;
+
+      const fetchArticlesByCategory = async () => {
+        const { data, error } = await supabase
+          .from("posts")
+          .select("*")
+          .order("createdAt", { ascending: false })
+          .eq("categories", categoryName);
+
+        if (data) {
+          setPosts(data);
+        }
+
+        if (error) {
+          console.log(error);
+        }
+      };
+      fetchArticlesByCategory();
+
+  }, [categoryName]);
+
+  // console.log(categoryName);
 
   return (
     <div className="md:flex flex-grow">
       <section className="w-full md-2/3 flex-col items-center px-3">
-        <ArticleList articles={articles} />
+        <ArticleList articles={posts} />
       </section>
 
       <aside className="w-full md:w-1/3 flex flex-col items-center px-3 md:pl-6">
@@ -51,4 +75,6 @@ export default async function Home() {
       </aside>
     </div>
   );
-}
+};
+
+export default CategoryBlogPage;

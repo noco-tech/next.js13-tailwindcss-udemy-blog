@@ -13,7 +13,7 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
     <article key={article.id} className="shadow my-4 flex flex-col">
       <Link href={`articles/${article.id}`} className="hover:opacity-90">
         <Image
-          src={`https://source.unsplash.com/collection/1345862/1000x500?sig=${article.id}`}
+          src={`https://source.unsplash.com/collection/6541735/1000x500?sig=${article.id}`}
           alt=""
           width={1280}
           height={300}
@@ -21,10 +21,10 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
       </Link>
       <div className="bg-white flex flex-col justify-start p-6">
         <Link
-          href={`articles/${article.id}`}
+          href={`/category?name=${article.categories}`}
           className="text-blue-700 pb-4 font-bold"
         >
-          Technology
+          {article.categories}
         </Link>
         <Link
           href={`articles/${article.id}`}

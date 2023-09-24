@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
+import { categoriesSelectData } from "@/categoriesSelectData";
 
 const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
@@ -9,6 +10,8 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   const [id, setId] = useState<string>(params.id);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+    const [categories, setCategories] = useState<string>("");
+
   const [loading, setLoading] = useState<boolean>(false);
 
   // 詳細ページのAPI呼び出し(supabaseから)
@@ -57,6 +60,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
       setId(detailArticle.id);
       setTitle(detailArticle.title);
       setContent(detailArticle.content);
+      setCategories(detailArticle.categories);
     }
     fetchDetailArticle();
   }, [id]);
@@ -73,7 +77,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
     // app/api/blog/[id]/route.tsから PUT呼び出したが、エラーのため、ここでupdateを呼び出す
     const { error: updateError } = await supabase
       .from("posts")
-      .update({ title, content })
+      .update({ title, content, categories })
       .eq("id", id);
 
     if (updateError) {
@@ -133,6 +137,25 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
             value={content}
             className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />
+        </div>
+
+        <label
+          htmlFor="category"
+          className="text-gray-700 text-sm font-bold mb-2"
+        >
+          カテゴリー
+        </label>
+        <div className="mb-3 focus:outline-none">
+          <select
+            id="category"
+            className="text-slate-300 shadow p-2 focus:outline-none rounded-md w-full"
+            value={categories}
+            onChange={(e) => setCategories(e.target.value)}
+          >
+            {categoriesSelectData.map((data, index) => (
+              <option selected key={index}>{data}</option>
+            ))}
+          </select>
         </div>
 
         <button

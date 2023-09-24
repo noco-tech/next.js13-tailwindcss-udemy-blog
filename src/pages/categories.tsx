@@ -1,24 +1,41 @@
+"use client";
+
+import { ArticleList } from "@/app/components/ArticleList";
+import { Article } from "@/types";
+import { supabase } from "@/utils/supabaseClient";
 import Link from "next/link";
+import { useRouter } from "next/router";
+// import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from "react";
 
-import { ArticleList } from "./components/ArticleList";
+const CategoryBlogPage = () => {
+  const [posts, setPosts] = useState<Article[]>([]);
+  const router = useRouter();
 
-export default async function Home() {
-  // 全記事をjson-serverから取得するAPIを呼ぶ
-  // const articles = await getAllArticles();
-  // console.log(articles);
+  useEffect(() => {
+    if (!router.isReady) return;
 
-  // console.log(supabase)
-  /* スパベースから全記事データを取得する */
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${API_URL}/api/blog`, { cache: "no-store" }); //SSR
+    const fetchArticlesByCategory = async () => {
+      const { data, error } = await supabase
+        .from("posts")
+        .select("*")
+        .eq("categories", router.query.name);
 
-  const articles = await res.json();
-  // console.log(articles);
+      if (data) {
+        setPosts(data);
+      }
+
+      if (error) {
+        console.log(error);
+      }
+    };
+    fetchArticlesByCategory();
+  }, [router.isReady, router.query]);
 
   return (
     <div className="md:flex flex-grow">
       <section className="w-full md-2/3 flex-col items-center px-3">
-        <ArticleList articles={articles} />
+        <ArticleList articles={posts} />
       </section>
 
       <aside className="w-full md:w-1/3 flex flex-col items-center px-3 md:pl-6">
@@ -51,4 +68,6 @@ export default async function Home() {
       </aside>
     </div>
   );
-}
+};
+
+export default CategoryBlogPage;
