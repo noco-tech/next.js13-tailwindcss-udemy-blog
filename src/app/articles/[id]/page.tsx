@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import { getDetailArticle } from "@/blogAPI";
 import Image from "next/image";
 import { DeleteButton } from "@/app/components/DeleteButton";
 import { UpdateButton } from "@/app/components/UpdateButton";
+import MarkdownRenderer from "@/app/components/MarkdownRenderer";
 
 const Article = async ({ params }: { params: { id: string } }) => {
   // 詳細ページのAPI呼び出し(json-serverから)
@@ -30,7 +32,9 @@ const Article = async ({ params }: { params: { id: string } }) => {
 
       <h1 className="text-4xl text-center my-10">{detailArticle.title}</h1>
       <div className="text-lg leading-relaxed text-justify">
-        <p>{detailArticle.content}</p>
+        <article>
+          <MarkdownRenderer content={detailArticle.content} />
+        </article>
         <p>Published {new Date(detailArticle.createdAt).toLocaleString()}</p>
       </div>
 

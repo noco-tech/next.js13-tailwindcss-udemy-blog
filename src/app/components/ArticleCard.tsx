@@ -1,14 +1,15 @@
+
 import { Article } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
 
 type ArticleCardProps = {
   article: Article;
 };
 
 export const ArticleCard = ({ article }: ArticleCardProps) => {
-
   return (
     <article key={article.id} className="shadow my-4 flex flex-col">
       <Link href={`articles/${article.id}`} className="hover:opacity-90">
