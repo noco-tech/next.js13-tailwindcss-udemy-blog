@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${inter.className} container mx-auto bg-slate-700 text-slate-50`}
+        className={`${inter.className} container mx-auto bg-primary text-slate-50`}
       >
         <div className="flex flex-col min-h-screen">
           <Header />

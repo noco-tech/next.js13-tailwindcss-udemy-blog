@@ -74,10 +74,8 @@ export default async function Home() {
 
       <aside className="w-full md:w-1/3 flex flex-col items-center px-3 md:pl-6">
         <div className="sticky top-0">
-          <div className="bg-white shadow-md rounded p-4 mb-6 mt-4">
-            <h3 className="font-bold text-gray-900 mb-2">
-              About Me
-            </h3>
+          <div className="bg-customGray shadow-md rounded p-4 mb-6 mt-4">
+            <h3 className="font-bold text-gray-900 mb-2">About Me</h3>
             <div className="flex justify-center items-center">
               <Image
                 src={kamatamaImage}
@@ -86,7 +84,6 @@ export default async function Home() {
                 height={50}
                 className="rounded-full"
               />
-
             </div>
             <p className="text-gray-600">
               熱心なプロフェッショナルで、チームワークを重視。常に学び続ける姿勢を持ち、新しい挑戦を楽しむ。結果を重視し、効率的な解決策を模索。
@@ -101,25 +98,25 @@ export default async function Home() {
               />
             </div>
           </div>
-          <div className="bg-white shadow-md rounded p-4 mb-6 mt-4 w-full">
-            <h3 className="font-bold text-gray-900 mb-2">
+          <div className="bg-secondary shadow-md rounded p-4 mb-6 mt-4 w-full">
+            <h3 className="font-bold text-customGray mb-2">
               All Posts ({articles.length})
             </h3>
-            <ul className="text-gray-600 mt-2">
-              <li>
+            <ul className="text-customGray mt-2 ">
+              <li className="hover:text-slate-300 transition-all duration-100">
                 <Link href="/category?name=Technology">
                   Technology ({tecLen})
                 </Link>
               </li>
-              <li>
+              <li className="hover:text-slate-300 transition-all duration-100">
                 <Link href="/category?name=Automotive">
                   Automotive ({autLen})
                 </Link>
               </li>
-              <li>
+              <li className="hover:text-slate-300 transition-all duration-100">
                 <Link href="/category?name=Finance">Finance ({finLen})</Link>
               </li>
-              <li>
+              <li className="hover:text-slate-300 transition-all duration-100">
                 <Link href="/category?name=Sports">Sports ({spoLen})</Link>
               </li>
             </ul>
