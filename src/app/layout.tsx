@@ -6,7 +6,7 @@ import Loading from "./loading";
 
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import  Providers  from "@/app/components/Providers";
+import Providers from "@/app/components/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { ArticleList } from "./components/ArticleList";
 import { Article } from "@/types";
-import penguinImage from "/images/penguin.png"
 import kamatamaImage from "/images/kamatama.jpg"
+import ThemeButton from "@/app/components/ThemeButton";
 
 
 export default async function Home() {
@@ -13,7 +13,7 @@ export default async function Home() {
   // console.log(articles);
   // console.log(supabase)
 
-  
+
   /* スパベースから全記事データを取得するAPIを呼ぶ */
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const res = await fetch(`${API_URL}/api/blog`, { cache: "no-store" }); //SSR
@@ -90,13 +90,7 @@ export default async function Home() {
               プロフェッショナルな中にも熱い心を隠している冒険者。新しい知識は私のデザートのようなごちそう。未知の挑戦にワクワクし、結果を出しつつ、スマートな解を探求します。
             </p>
             <div className="flex items-center justify-around">
-              <Image
-                src={`https://source.unsplash.com/collection/6541735/1000x500?sig=2`}
-                alt="ロゴ画像"
-                width={70}
-                height={70}
-                className="rounded-full"
-              />
+              <ThemeButton />
             </div>
           </div>
           <div className="bg-secondary shadow-md rounded p-4 mb-6 mt-4 w-full">

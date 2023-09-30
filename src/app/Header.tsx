@@ -1,11 +1,21 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
+import { useThemeStore } from './components/ThemeStore';
+
 
 export const Header = () => {
+  let { themeState } = useThemeStore();
+
+
   return (
     <header className="py-5 px-10 border-b border-b-secondary flex justify-between items-center">
       <div>
-        <h1 className="text-2xl text-customGray font-extrabold">
+        <h1
+          className={`text-2xl ${
+            themeState === "dark" ? "text-customGray" : "text-primary"
+          } font-extrabold`}
+        >
           <Link href="/">Next.js Blog</Link>
         </h1>
       </div>

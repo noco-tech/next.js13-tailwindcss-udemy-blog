@@ -2,21 +2,30 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useThemeStore } from "./ThemeStore";
+
 export default function ThemeButton() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  let { themeState, setThemeState } = useThemeStore(); // zustand
+
   useEffect(() => {
     setMounted(true);
+    setTheme('dark')
   }, []);
+
+
 
   if (!mounted) return null;
 
   const onClickHandler = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
+    if (theme === "dark") {
       setTheme("light");
+      setThemeState("light");
+    } else {
+      setTheme("dark");
+      setThemeState("dark");
     }
   };
 
