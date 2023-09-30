@@ -149,7 +149,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
         <div className="mb-3 focus:outline-none">
           <select
             id="category"
-            className="text-slate-300 shadow p-2 focus:outline-none rounded-md w-full"
+            className="text-gray-700 shadow p-2 focus:outline-none rounded-md w-full"
             value={categories}
             onChange={(e) => setCategories(e.target.value)}
           >
