@@ -13,6 +13,7 @@ export default async function Home() {
   // console.log(articles);
   // console.log(supabase)
 
+  
   /* スパベースから全記事データを取得するAPIを呼ぶ */
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const res = await fetch(`${API_URL}/api/blog`, { cache: "no-store" }); //SSR
@@ -86,7 +87,7 @@ export default async function Home() {
               />
             </div>
             <p className="text-gray-600">
-              熱心なプロフェッショナルで、チームワークを重視。常に学び続ける姿勢を持ち、新しい挑戦を楽しむ。結果を重視し、効率的な解決策を模索。
+              プロフェッショナルな中にも熱い心を隠している冒険者。新しい知識は私のデザートのようなごちそう。未知の挑戦にワクワクし、結果を出しつつ、スマートな解を探求します。
             </p>
             <div className="flex items-center justify-around">
               <Image
@@ -103,20 +104,20 @@ export default async function Home() {
               All Posts ({articles.length})
             </h3>
             <ul className="text-customGray mt-2 ">
-              <li className="hover:text-slate-300 transition-all duration-100">
+              <li className="hover:scale-105 transition-all duration-100">
                 <Link href="/category?name=Technology">
                   Technology ({tecLen})
                 </Link>
               </li>
-              <li className="hover:text-slate-300 transition-all duration-100">
+              <li className="hover:scale-105 transition-all duration-100">
                 <Link href="/category?name=Automotive">
                   Automotive ({autLen})
                 </Link>
               </li>
-              <li className="hover:text-slate-300 transition-all duration-100">
+              <li className="hover:scale-105 transition-all duration-100">
                 <Link href="/category?name=Finance">Finance ({finLen})</Link>
               </li>
-              <li className="hover:text-slate-300 transition-all duration-100">
+              <li className="hover:scale-105 transition-all duration-100">
                 <Link href="/category?name=Sports">Sports ({spoLen})</Link>
               </li>
             </ul>

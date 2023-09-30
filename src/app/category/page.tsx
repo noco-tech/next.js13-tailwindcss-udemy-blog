@@ -21,6 +21,13 @@ const CategoryBlogPage = () => {
   // カテゴリーのURLパラメータを取得する /category?name=Technology
   const searchParams = useSearchParams() || null;
   const categoryName = searchParams?.get("name");
+  /* 追伸 propsで受け取る方法もある
+  const CategoryBlogPage = ({
+  searchParams: { name }
+}: {
+  searchParams: { name: string | null };
+}) => {
+  */
 
   useEffect(() => {
     if (!categoryName) return;
@@ -82,7 +89,6 @@ const CategoryBlogPage = () => {
       categoryNameLength("Automotive");
       categoryNameLength("Finance");
       categoryNameLength("Sports");
-
     };
     fetchCategoryName();
   }, []);
