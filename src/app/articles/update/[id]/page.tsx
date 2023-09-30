@@ -10,7 +10,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   const [id, setId] = useState<string>(params.id);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-    const [categories, setCategories] = useState<string>("");
+  const [categories, setCategories] = useState<string>("");
 
   const [loading, setLoading] = useState<boolean>(false);
 

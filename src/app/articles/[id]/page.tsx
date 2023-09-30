@@ -1,25 +1,44 @@
 "use client";
-import React from "react";
+import { useEffect, useState } from "react";
+
 import { getDetailArticle } from "@/blogAPI";
+import { deleteArticle } from '../../../blogAPI';
 import Image from "next/image";
 import { DeleteButton } from "@/app/components/DeleteButton";
 import { UpdateButton } from "@/app/components/UpdateButton";
 import MarkdownRenderer from "@/app/components/MarkdownRenderer";
+import Loading from "@/app/loading";
+import { Article } from "@/types";
 
-const Article = async ({ params }: { params: { id: string } }) => {
+
+const Article = ({ params }: { params: { id: string } }) => {
   // 詳細ページのAPI呼び出し(json-serverから)
   // const detailArticle = await getDetailArticle(params.id);
 
+  const [detailArticle, setDetailArticle] = useState<Article | null>(null);
+
   // 詳細ページのAPI呼び出し(supabaseから)
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  useEffect(() => {
+    const fetchArticle = async () => {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const res = await fetch(`${API_URL}/api/blog/${params.id}`, {
-    next: {
-      revalidate: 10,
-    },
-  }); //ISR
+      const res = await fetch(`${API_URL}/api/blog/${params.id}`, {
+        next: {
+          revalidate: 10,
+        },
+      }); //ISR
+      const data = await res.json();
+      setDetailArticle(data);
+    }
+    fetchArticle();
 
-  const detailArticle = await res.json();
+  }, [params.id])
+
+
+  if (!detailArticle) {
+    return <Loading />
+  }
+
 
   return (
     <div className="max-w-3xl mx-auto p-5">
