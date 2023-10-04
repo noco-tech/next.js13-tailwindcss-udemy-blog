@@ -99,11 +99,12 @@
   @apply bg-gray-100 !important;
 }
 
+/* ReactMarkDownのダークモード対応 */
 .lightThemeText {
-  color: #212121;
+  @apply text-primary;
 }
 .darkThemeText {
-  color: #f7f7f7;
+  @apply text-customGray;
 }
 
 /* darkmode トグルボタン */

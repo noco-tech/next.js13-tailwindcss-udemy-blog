@@ -1,11 +1,13 @@
-import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useThemeStore } from "./ThemeStore";
+import { useTheme } from "next-themes";
 
 const MarkdownRenderer = ({ content }) => {
-  let { themeState } = useThemeStore(); // zustand
+  // const { themeState } = useThemeStore(); // zustand
+
+  const { theme } = useTheme(); //next-themes
+
 
   const components = {
     code({ node, inline, className, children, ...props }) {
@@ -29,9 +31,7 @@ const MarkdownRenderer = ({ content }) => {
 
   return (
     <ReactMarkdown
-      className={`markdown ${
-        themeState === "light" ? "lightThemeText" : "darkThemeText"
-      }`}
+      className={`markdown ${theme === "light" ? "lightThemeText" : "darkThemeText"}`}
       components={components}
     >
       {content}

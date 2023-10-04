@@ -8,7 +8,7 @@ export default function ThemeButton() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  const { themeState, setThemeState } = useThemeStore(); // zustand
+  // const { themeState, setThemeState } = useThemeStore(); // zustand
 
   useEffect(() => {
     setMounted(true);
@@ -16,14 +16,12 @@ export default function ThemeButton() {
 
   useEffect(() => {
     theme === "dark" ? setTheme("dark") : setTheme("light");
-    setThemeState(theme);
-  }, [theme, setTheme, setThemeState]);
+  }, [theme, setTheme]);
 
   if (!mounted) return null;
 
   const onClickHandler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
-    setThemeState(theme);
   };
 
   return (
