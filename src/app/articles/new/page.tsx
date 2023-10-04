@@ -5,15 +5,14 @@ import { useRouter } from "next/navigation";
 import { createArticle } from "@/blogAPI";
 import { categoriesSelectData } from "@/categoriesSelectData";
 
-
-
 const CreateBlogPage = () => {
   const router = useRouter();
+
 
   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [categories, setCategories] = useState<string>("");
+  const [categories, setCategories] = useState<string>("Technology");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,8 +45,6 @@ const CreateBlogPage = () => {
     router.refresh();
   };
 
-
-
   return (
     <div className="min-h-screen py-8 px-4 md:px-12">
       <h2 className="text-2xl font-bold mb-4">ブログ新規作成</h2>
@@ -64,7 +61,8 @@ const CreateBlogPage = () => {
             id="url"
             onChange={(e) => setId(e.target.value)}
             value={id}
-            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className={`bg-customGray
+            shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none`}
           />
         </div>
         <div className="mb-4">
@@ -79,7 +77,7 @@ const CreateBlogPage = () => {
             id="title"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
-            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className="bg-customGray shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />
         </div>
         <div className="mb-4">
@@ -94,7 +92,7 @@ const CreateBlogPage = () => {
             rows={11}
             onChange={(e) => setContent(e.target.value)}
             value={content}
-            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className="bg-customGray shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />
         </div>
 
@@ -107,7 +105,8 @@ const CreateBlogPage = () => {
         <div className="mb-3 focus:outline-none">
           <select
             id="category"
-            className="text-gray-700 shadow p-2 focus:outline-none rounded-md w-full"
+            value={categories}
+            className="bg-customGray text-gray-700 shadow p-2 focus:outline-none rounded-md w-full"
             onChange={(e) => setCategories(e.target.value)}
           >
             {categoriesSelectData.map((data, index) => (
@@ -117,10 +116,10 @@ const CreateBlogPage = () => {
         </div>
 
         <button
-          className={`py-2 px-4 border rounded-md ${
+          className={`py-2 px-4 border rounded-md text-customGray ${
             loading
-              ? "bg-orange-300 cursor-not-allowed"
-              : "bg-orange-400 hover:bg-orange-500"
+              ? "bg-red-600 cursor-not-allowed"
+              : "bg-secondary hover:bg-red-800"
           }  `}
           disabled={loading}
         >

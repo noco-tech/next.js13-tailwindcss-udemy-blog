@@ -89,6 +89,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
     router.refresh();
   };
 
+
   return (
     <div className="min-h-screen py-8 px-4 md:px-12">
       <h2 className="text-2xl font-bold mb-4">ブログ編集</h2>
@@ -121,7 +122,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
             id="title"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
-            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className="shadow border rounded w-full py-2 px-3 bg-customGray text-gray-700 leading-tight focus:outline-none"
           />
         </div>
         <div className="mb-4">
@@ -136,7 +137,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
             rows={11}
             onChange={(e) => setContent(e.target.value)}
             value={content}
-            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className="shadow border rounded w-full py-2 px-3 bg-customGray  text-gray-700 leading-tight focus:outline-none"
           />
         </div>
 
@@ -149,21 +150,23 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
         <div className="mb-3 focus:outline-none">
           <select
             id="category"
-            className="text-gray-700 shadow p-2 focus:outline-none rounded-md w-full"
+            className="text-gray-700 shadow p-2 bg-customGray  focus:outline-none rounded-md w-full"
             value={categories}
             onChange={(e) => setCategories(e.target.value)}
           >
             {categoriesSelectData.map((data, index) => (
-              <option selected key={index}>{data}</option>
+              <option selected key={index}>
+                {data}
+              </option>
             ))}
           </select>
         </div>
 
         <button
-          className={`py-2 px-4 border rounded-md ${
+          className={`py-2 px-4 border text-customGray rounded-md ${
             loading
-              ? "bg-orange-300 cursor-not-allowed"
-              : "bg-orange-400 hover:bg-orange-500"
+              ? "bg-red-600 cursor-not-allowed"
+              : "bg-red-700 hover:bg-red-800"
           }  `}
           disabled={loading}
         >

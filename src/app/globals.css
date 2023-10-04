@@ -99,11 +99,17 @@
   @apply bg-gray-100 !important;
 }
 
+.lightThemeText {
+  color: #212121;
+}
+.darkThemeText {
+  color: #f7f7f7;
+}
 
 /* darkmode トグルボタン */
 [data-theme="dark"] {
   --background: #212121; /* primary */
-  --foreground: white;
+  --foreground: #f7f7f7;
 }
 
 body {

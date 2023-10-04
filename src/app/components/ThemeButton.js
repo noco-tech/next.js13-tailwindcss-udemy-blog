@@ -8,25 +8,22 @@ export default function ThemeButton() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  let { themeState, setThemeState } = useThemeStore(); // zustand
+  const { themeState, setThemeState } = useThemeStore(); // zustand
 
   useEffect(() => {
     setMounted(true);
-    setTheme('dark')
   }, []);
 
-
+  useEffect(() => {
+    theme === "dark" ? setTheme("dark") : setTheme("light");
+    setThemeState(theme);
+  }, [theme, setTheme, setThemeState]);
 
   if (!mounted) return null;
 
   const onClickHandler = () => {
-    if (theme === "dark") {
-      setTheme("light");
-      setThemeState("light");
-    } else {
-      setTheme("dark");
-      setThemeState("dark");
-    }
+    theme === "light" ? setTheme("dark") : setTheme("light");
+    setThemeState(theme);
   };
 
   return (
