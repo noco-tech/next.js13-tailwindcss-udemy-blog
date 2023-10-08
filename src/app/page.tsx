@@ -3,16 +3,14 @@ import Image from "next/image";
 
 import { ArticleList } from "./components/ArticleList";
 import { Article } from "@/types";
-import kamaTamaImage from "/images/kamaTama.jpg"
+import kamaTamaImage from "/images/kamaTama.jpg";
 import ThemeButton from "@/app/components/ThemeButton";
-
 
 export default async function Home() {
   // 全記事をjson-serverから取得するAPIを呼ぶ
   // const articles = await getAllArticles();
   // console.log(articles);
   // console.log(supabase)
-
 
   /* スパベースから全記事データを取得するAPIを呼ぶ */
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -29,18 +27,27 @@ export default async function Home() {
   const categories = await catRes.json();
   // console.log(categories);
 
-  /* 各カテゴリーの記事数の変数を定義
-  カテゴリーが増えた場合ここに追記 */
-  let tecLen = categories.find((item: { category: string; }) => item.category === 'Technology').count;
-  let autLen = categories.find((item: { category: string; }) => item.category === 'Automotive').count;
-  let finLen = categories.find((item: { category: string; }) => item.category === 'Finance').count;
-  let spoLen = categories.find((item: { category: string; }) => item.category === 'Sports').count
+  /* 各カテゴリーの記事数の取得
+  カテゴリーが増えた場合、こことsupabaseのSQLに追記 */
+  const getCountFromCategory = (categoryName: string) => {
+    const item = categories.find(
+      (item: { category: string }) => item.category === categoryName
+    );
+    return item ? item.count : 0;
+  }
 
+  let tecLen = getCountFromCategory("Technology");
+  let autLen = getCountFromCategory("Automotive");
+  let finLen = getCountFromCategory("Finance");
+  let spoLen = getCountFromCategory("Sports");
+
+
+
+  // SQLのcountを使わない場合のコード
   // const categoryNameLength = (categoryNameFilter: string) => {
   //   const filteredData = categories?.filter((item: { categories: string[] }) =>
   //     item.categories.includes(categoryNameFilter)
   //     );
-
 
   //   if (!filteredData) return;
 
@@ -64,8 +71,6 @@ export default async function Home() {
   // categoryNameLength("Automotive");
   // categoryNameLength("Finance");
   // categoryNameLength("Sports");
-
-
 
   return (
     <div className="md:flex flex-grow">

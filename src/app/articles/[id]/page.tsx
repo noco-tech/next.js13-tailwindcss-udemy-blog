@@ -1,42 +1,34 @@
-"use client";
-import { useEffect, useState } from "react";
-
 import Image from "next/image";
+
 import { DeleteButton } from "@/app/components/DeleteButton";
 import { UpdateButton } from "@/app/components/UpdateButton";
 import MarkdownRenderer from "@/app/components/MarkdownRenderer";
 import Loading from "@/app/loading";
 import { Article } from "@/types";
+import { deleteArticle } from '../../../blogAPI';
 
-
-const Article = ({ params }: { params: { id: string } }) => {
+const Article = async ({ params }: { params: { id: string } } ) => {
   // 詳細ページのAPI呼び出し(json-serverから)
   // const detailArticle = await getDetailArticle(params.id);
 
-  const [detailArticle, setDetailArticle] = useState<Article | null>(null);
-
   // 詳細ページのAPI呼び出し(supabaseから)
-  useEffect(() => {
-    const fetchArticle = async () => {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = process.env.API_URL;
 
-      const res = await fetch(`${API_URL}/api/blog/${params.id}`, {
-        next: {
-          revalidate: 10,
-        },
-      }); //ISR
-      const data = await res.json();
-      setDetailArticle(data);
-    }
-    fetchArticle();
+  const res = await fetch(`${API_URL}/api/blog/${params.id}`, {
+    next: {
+      revalidate: 10,
+    },
+  }); //ISR
 
-  }, [params.id])
+  const data = await res.json();
+  const detailArticle: Article = data;
+
+
 
 
   if (!detailArticle) {
-    return <Loading />
+    return <Loading />;
   }
-
 
   return (
     <div className="max-w-3xl mx-auto p-5">
@@ -56,11 +48,11 @@ const Article = ({ params }: { params: { id: string } }) => {
       </div>
 
       <div className="flex justify-end mt-3 gap-4">
-        <div>
+        {/* <div>
           <UpdateButton id={detailArticle.id} />
-        </div>
+        </div> */}
         <div>
-          <DeleteButton id={detailArticle.id} />
+          <DeleteButton id={detailArticle.id} API_URL={API_URL} />
         </div>
       </div>
     </div>
