@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { createArticle } from "@/blogAPI";
 import { categoriesSelectData } from "@/categoriesSelectData";
 
 const CreateBlogPage = () => {

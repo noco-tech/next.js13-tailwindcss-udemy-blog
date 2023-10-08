@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { getDetailArticle } from "@/blogAPI";
-import { deleteArticle } from '../../../blogAPI';
 import Image from "next/image";
 import { DeleteButton } from "@/app/components/DeleteButton";
 import { UpdateButton } from "@/app/components/UpdateButton";

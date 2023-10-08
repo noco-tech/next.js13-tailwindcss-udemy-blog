@@ -1,6 +1,5 @@
 "use client";
 
-import { deleteArticle } from "@/blogAPI";
 import { useRouter } from "next/navigation";
 
 type deleteProps = {
