@@ -48,9 +48,9 @@ const Article = async ({ params }: { params: { id: string } } ) => {
       </div>
 
       <div className="flex justify-end mt-3 gap-4">
-        {/* <div>
-          <UpdateButton id={detailArticle.id} />
-        </div> */}
+        <div>
+          <UpdateButton id={detailArticle.id} API_URL={API_URL} />
+        </div>
         <div>
           <DeleteButton id={detailArticle.id} API_URL={API_URL} />
         </div>

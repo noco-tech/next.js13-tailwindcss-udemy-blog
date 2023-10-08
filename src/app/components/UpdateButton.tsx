@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 
 type updateProps = {
   id: string;
+  API_URL: string | undefined;
 };
 
-export const UpdateButton = ({ id }: updateProps) => {
+export const UpdateButton = ({ id, API_URL }: updateProps) => {
   const router = useRouter();
 
   const handleUpdate = async () => {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
+    
     router.push(`${API_URL}/articles/update/${id}`);
     router.refresh();
   };
