@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { ArticleList } from "./components/ArticleList";
 import { Article } from "@/types";
-import kamaTamaImage from "/images/kamaTama.jpg";
+import kamaTamaImage from "/public/images/kamaTama.jpg";
 import ThemeButton from "@/app/components/ThemeButton";
 
 export default async function Home() {

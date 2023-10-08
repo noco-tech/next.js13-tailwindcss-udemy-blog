@@ -9,7 +9,7 @@ import { ArticleList } from "@/app/components/ArticleList";
 import { PostgrestResponse } from "@supabase/supabase-js";
 
 import Image from "next/image";
-import kamaTamaImage from "/images/kamaTama.jpg";
+import kamaTamaImage from "/public/images/kamaTama.jpg";
 
 const CategoryBlogPage = () => {
   const [posts, setPosts] = useState<Article[]>([]);
