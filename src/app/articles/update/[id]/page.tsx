@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 import { categoriesSelectData } from "@/categoriesSelectData";
@@ -36,7 +36,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
   // }, [id]);
 
   // 詳細ページのAPI呼び出し(supabaseから)
-  const fetchDetailData = async () => {
+  const fetchDetailData = useCallback(async () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     const res = await fetch(`${API_URL}/api/blog/${params.id}`, {
@@ -49,7 +49,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
 
     return detailArticle;
 
-  }
+  }, [params.id])
 
   useEffect(() => {
     const fetchDetailArticle = async () => {
@@ -63,7 +63,7 @@ const UpdateBlogPage = ({ params }: { params: { id: string } }) => {
       setCategories(detailArticle.categories);
     }
     fetchDetailArticle();
-  }, [id]);
+  }, [id, fetchDetailData]);
 
 
 

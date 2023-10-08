@@ -9,7 +9,7 @@ import { ArticleList } from "@/app/components/ArticleList";
 import { PostgrestResponse } from "@supabase/supabase-js";
 
 import Image from "next/image";
-import kamatamaImage from "/images/kamaTama.jpg";
+import kamaTamaImage from "/images/kamaTama.jpg";
 
 const CategoryBlogPage = () => {
   const [posts, setPosts] = useState<Article[]>([]);
@@ -110,7 +110,7 @@ const CategoryBlogPage = () => {
             <h3 className="font-bold text-gray-900 mb-2">About Me</h3>
             <div className="flex justify-center items-center">
               <Image
-                src={kamatamaImage}
+                src={kamaTamaImage}
                 alt="ロゴ画像"
                 width={50}
                 height={50}

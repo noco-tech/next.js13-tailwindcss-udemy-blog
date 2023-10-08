@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { ArticleList } from "./components/ArticleList";
 import { Article } from "@/types";
-import kamatamaImage from "/images/kamatama.jpg"
+import kamaTamaImage from "/images/kamaTama.jpg"
 import ThemeButton from "@/app/components/ThemeButton";
 
 
@@ -79,7 +79,7 @@ export default async function Home() {
             <h3 className="font-bold text-gray-900 mb-2">About Me</h3>
             <div className="flex justify-center items-center">
               <Image
-                src={kamatamaImage}
+                src={kamaTamaImage}
                 alt="ロゴ画像"
                 width={50}
                 height={50}
