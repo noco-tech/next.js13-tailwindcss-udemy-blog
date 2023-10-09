@@ -7,10 +7,6 @@ import kamaTamaImage from "/public/images/kamaTama.jpg";
 import ThemeButton from "@/app/components/ThemeButton";
 
 export default async function Home() {
-  // 全記事をjson-serverから取得するAPIを呼ぶ
-  // const articles = await getAllArticles();
-  // console.log(articles);
-  // console.log(supabase)
 
   /* スパベースから全記事データを取得するAPIを呼ぶ */
   const API_URL = process.env.NEXT_PUBLIC_API_URL;

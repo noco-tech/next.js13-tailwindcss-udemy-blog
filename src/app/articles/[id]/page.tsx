@@ -5,12 +5,9 @@ import { UpdateButton } from "@/app/components/UpdateButton";
 import MarkdownRenderer from "@/app/components/MarkdownRenderer";
 import Loading from "@/app/loading";
 import { Article } from "@/types";
-import { deleteArticle } from '../../../blogAPI';
 
 const Article = async ({ params }: { params: { id: string } } ) => {
-  // 詳細ページのAPI呼び出し(json-serverから)
-  // const detailArticle = await getDetailArticle(params.id);
-
+  
   // 詳細ページのAPI呼び出し(supabaseから)
   const API_URL = process.env.API_URL;
 

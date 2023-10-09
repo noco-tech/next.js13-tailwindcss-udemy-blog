@@ -26,7 +26,7 @@ export async function POST(req: Request, res: NextApiResponse) {
   // 投稿に必要な属性を取得
   const { id, title, content, categories } = await req.json();
 
-  // 記事投稿用のAPI 初期値を設定
+  // 記事投稿用のAPI
   const { data: posts, error } = await supabase.from("posts").insert([
     {
       id,
