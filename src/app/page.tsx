@@ -15,6 +15,10 @@ export default async function Home() {
   const articles: Article[] = await res.json();
   // console.log(articles);
 
+  if (!articles) {
+    return <div className="text-center text-2xl mt-10 border-sky-200 p-5">まだ記事がありません😢 記事を投稿してください</div>;
+  }
+
   /* 各カテゴリーの記事数を取得するAPIを呼ぶ */
   const catRes = await fetch(`${API_URL}/api/blog/category`, {
     cache: "no-store",
@@ -23,8 +27,7 @@ export default async function Home() {
   const categories = await catRes.json();
   // console.log(categories);
 
-  /* 各カテゴリーの記事数の取得
-  カテゴリーが増えた場合、ここに追記 */
+  /* 各カテゴリーの記事数の取得 */
   const getCountFromCategory = (categoryName: string) => {
     const item = categories.find(
       (item: { category: string }) => item.category === categoryName

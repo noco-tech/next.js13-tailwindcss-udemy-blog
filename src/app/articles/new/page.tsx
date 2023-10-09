@@ -1,5 +1,5 @@
 
-import CreateButton from "@/app/components/CreateButton";
+import CreatePage from "@/app/components/CreatePage";
 
 const CreateBlogPage = async () => {
 
@@ -9,7 +9,7 @@ const CreateBlogPage = async () => {
 
   return (
     <div className="">
-      <CreateButton API_URL={API_URL} />
+      <CreatePage API_URL={API_URL} />
     </div>
   );
 };

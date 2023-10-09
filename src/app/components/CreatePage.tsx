@@ -8,7 +8,7 @@ type createProps = {
   API_URL: string | undefined;
 };
 
-const CreateButton = ({ API_URL }: createProps) => {
+const CreatePage = ({ API_URL }: createProps) => {
   const router = useRouter();
 
   const [id, setId] = useState<string>("");
@@ -126,4 +126,4 @@ const CreateButton = ({ API_URL }: createProps) => {
   );
 };
 
-export default CreateButton;
+export default CreatePage;

@@ -4,10 +4,11 @@ import { DeleteButton } from "@/app/components/DeleteButton";
 import { UpdateButton } from "@/app/components/UpdateButton";
 import MarkdownRenderer from "@/app/components/MarkdownRenderer";
 import Loading from "@/app/loading";
-import { Article } from "@/types";
+import { Article as ArticleType } from "@/types";
+
 
 const Article = async ({ params }: { params: { id: string } } ) => {
-  
+
   // 詳細ページのAPI呼び出し(supabaseから)
   const API_URL = process.env.API_URL;
 
@@ -17,10 +18,7 @@ const Article = async ({ params }: { params: { id: string } } ) => {
     },
   }); //ISR
 
-  const data = await res.json();
-  const detailArticle: Article = data;
-
-
+  const detailArticle: ArticleType = await res.json();
 
 
   if (!detailArticle) {
