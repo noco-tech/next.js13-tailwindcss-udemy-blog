@@ -28,7 +28,7 @@ export default async function Home() {
   // console.log(categories);
 
   /* 各カテゴリーの記事数の取得
-  カテゴリーが増えた場合、こことsupabaseのSQLに追記 */
+  カテゴリーが増えた場合、ここに追記 */
   const getCountFromCategory = (categoryName: string) => {
     const item = categories.find(
       (item: { category: string }) => item.category === categoryName
